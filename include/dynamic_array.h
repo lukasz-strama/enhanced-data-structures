@@ -78,4 +78,29 @@ void dynamic_array_reserve(DynamicArray *arr, size_t new_capacity);
  */
 void dynamic_array_free(DynamicArray *arr);
 
+/**
+ * @brief Copies the contents of one dynamic array to another.
+ *
+ * @param dest Pointer to the destination DynamicArray structure.
+ * @param src Pointer to the source DynamicArray structure.
+ */
+void dynamic_array_copy(DynamicArray *dest, const DynamicArray *src);
+
+/**
+ * @brief Inserts an element at the specified index in the dynamic array.
+ *
+ * @param arr Pointer to the DynamicArray structure.
+ * @param index Index at which to insert the element.
+ * @param value Pointer to the value to be inserted.
+ */
+void dynamic_array_insert(DynamicArray *arr, size_t index, const void *value);
+
+/**
+ * @brief Removes the element at the specified index in the dynamic array.
+ *
+ * @param arr Pointer to the DynamicArray structure.
+ * @param index Index of the element to remove.
+ */
+void dynamic_array_erase(DynamicArray *arr, size_t index);
+
 #endif /* DYNAMIC_ARRAY_H */

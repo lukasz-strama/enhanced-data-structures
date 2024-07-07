@@ -1,5 +1,6 @@
 #include "../include/dynamic_array.h"
 #include <stdlib.h>
+#include "../include/dynamic_array.h"
 
 // Copies `size` bytes from `src` to `dest` memory locations.
 static void element_copy(void *dest, const void *src, size_t size)
@@ -91,4 +92,55 @@ void dynamic_array_free(DynamicArray *arr)
     arr->data = NULL;  // Set data pointer to NULL
     arr->size = 0;     // Reset size of the array to 0
     arr->capacity = 0; // Reset capacity of the array to 0
+}
+
+// Copies the contents of one dynamic array to another.
+void dynamic_array_copy(DynamicArray *dest, const DynamicArray *src)
+{
+    dynamic_array_init(dest, src->capacity, src->item_size); // Initialize destination array with same capacity and item size
+    for (size_t i = 0; i < src->size; ++i)
+    {
+        dynamic_array_push_back(dest, dynamic_array_at(src, i)); // Copy each element from source to destination
+    }
+}
+
+// Inserts an element at the specified index in the dynamic array.
+void dynamic_array_insert(DynamicArray *arr, size_t index, const void *value)
+{
+    if (index <= arr->size)
+    {
+        // Check if the array needs to be resized
+        if (arr->size >= arr->capacity)
+        {
+            size_t new_capacity = arr->capacity * 2; // Double the current capacity
+            if (new_capacity == 0)                   // Ensure minimum capacity of 1 if current capacity is 0
+                new_capacity = 1;
+            dynamic_array_reserve(arr, new_capacity); // Reserve space if needed
+        }
+
+        // Shift elements to the right to make space for the new element
+        for (size_t i = arr->size; i > index; --i)
+        {
+            element_copy((char *)arr->data + i * arr->item_size, (char *)arr->data + (i - 1) * arr->item_size, arr->item_size);
+        }
+
+        // Insert the value at the specified index
+        element_copy((char *)arr->data + index * arr->item_size, value, arr->item_size);
+        arr->size++;
+    }
+}
+
+// Erases an element at the specified index in the dynamic array.
+void dynamic_array_erase(DynamicArray *arr, size_t index)
+{
+    if (index < arr->size)
+    {
+        for (size_t i = index; i < arr->size - 1; ++i) // Shift elements to the left
+        {
+            // Copy the next element to the current position
+            element_copy((char *)arr->data + i * arr->item_size, (char *)arr->data + (i + 1) * arr->item_size, arr->item_size);
+        }
+
+        arr->size--;
+    }
 }
