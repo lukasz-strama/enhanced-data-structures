@@ -22,7 +22,7 @@ To use EDS in your project, follow these steps:
 1. Clone the repository:
 
    ```sh
-   git clone https://github.com/your-username/EDS-C-Library.git
+   git clone https://github.com/lukasz-strama/enhanced-data-structures
    ```
 
 2. Include `dynamic_array.h` in your C project:
