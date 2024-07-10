@@ -1,6 +1,6 @@
 # Enhanced Data Structures (EDS)
 
-Enhanced Data Structures (EDS) is an open-source library providing various dynamic data structures implemented in C. This library is designed for versatility, efficiency, and ease of use in applications where dynamic data management is crucial.
+Enhanced Data Structures (EDS) is an open-source library providing various dynamic data structures implemented in C. This library is designed for versatility, efficiency and ease of use.
 
 ## Features
 
